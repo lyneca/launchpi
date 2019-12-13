@@ -4,6 +4,7 @@ use rppal::gpio::Gpio;
 use rppal::gpio::InputPin;
 use rppal::gpio::Level;
 
+mod launchkey;
 mod menu;
 
 struct Button {
@@ -72,6 +73,8 @@ fn main() {
     let mut disp: GraphicsMode<_> = Builder::new().connect_i2c(i2c).into();
 
     disp.init().expect("Could not init device");
+
+    let launchkey = launchkey::LaunchKey::new();
 
     let mut main_menu = menu::Menu::new();
 
